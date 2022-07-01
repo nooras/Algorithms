@@ -1,5 +1,5 @@
 from selenium import webdriver
-
+import time
 driver = webdriver.Chrome()
 driver.get('http://web.whatsapp.com')
 
@@ -12,12 +12,16 @@ msg = "Friendship is one of the greatest bonds anyone can ever wish for. Lucky a
 #Scan the code before proceeding further
 input('Enter anything after scanning QR code')
 
-user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
+#user = driver.find_element_by_xpath('//span[@title = "{}"]'.format(name))
+user = driver.find_element_by_css_selector('span[title = "{}"]'.format(name))
 user.click()
-
-msg_box = driver.find_element_by_class_name('_1Plpp')
+#//*[@id="main"]/footer/div[1]/div[2]
+#msg_box = driver.find_element_by_class_name('_2HE1Z')
+msg_box = driver.find_element_by_xpath('//*[@id="main"]/footer/div[1]/div[2]')
 
 for i in msg:
-    if i is not None:
-    	msg_box.send_keys(i)
-    	driver.find_element_by_class_name('_35EW6').click()
+	if i is not None:
+		print(i)
+		msg_box.send_keys(i)
+		time.sleep(1)
+		driver.find_element_by_class_name('_2Ujuu').click()
